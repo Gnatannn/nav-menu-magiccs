@@ -1,0 +1,102 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--background-color);
+}
+
+:root {
+  --icon-size: 2rem;
+  --nav-item-padding: calc(var(--icon-size) / 2);
+  --background-color: #333;
+}
+
+.navbar-container {
+  background-color: white;
+  border-radius: 0.5em;
+  max-width: max-content;
+  margin: 0 auto;
+  padding: 0 calc(var(--nav-item-padding) * 1.5);
+}
+
+.list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  padding: var(--nav-item-padding);
+}
+
+.list .text {
+  font-size: 0.8em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms ease-in-out;
+  display: none;
+}
+
+.list .icon {
+  position: relative;
+}
+
+.list .icon svg {
+  fill: currentColor;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: block;
+}
+
+.list .active .text {
+  pointer-events: all;
+  opacity: 1;
+}
+
+/* .list .active a {
+  padding: 0;
+} */
+
+.list .active .icon {
+  transform: translateY(calc(-50% - var(--nav-item-padding)));
+}
+
+.list .active .icon::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: orange;
+  width: calc(var(--icon-size) * 2);
+  height: calc(var(--icon-size) * 2);
+  top: calc(-0.5 * var(--icon-size));
+  left: calc(-0.5 * var(--icon-size));
+  border-radius: 100%;
+}
+
+.list .active .icon::before {
+  /* content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: var(--background-color);
+  width: calc(100% + )
+  top: -25%;
+  left: -25%;
+  bottom: -25%;
+  right: -25%;
+  border-radius: 100%; */
+}
