@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Magic navigation</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <nav class="navbar-container">
       <ul class="list">
-        <li class="active">
-          <a href="#">
+        <div style="--position: 0" data-indicator class="indicator">
+          <div class="corners"></div>
+        </div>
+
+        <li>
+          <a href="#" class="active">
             <div class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M0 0h24v24H0V0z" fill="none" />

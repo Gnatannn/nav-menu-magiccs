@@ -15,13 +15,15 @@ body {
 
 :root {
   --icon-size: 2rem;
+  --indicator-spacing: calc(var(--icon-size) / 8);
+  --border-radius: calc(var(--icon-size) / 4);
   --nav-item-padding: calc(var(--icon-size) / 2);
   --background-color: #333;
 }
 
 .navbar-container {
   background-color: white;
-  border-radius: 0.5em;
+  border-radius: var(--border-radius);
   max-width: max-content;
   margin: 0 auto;
   padding: 0 calc(var(--nav-item-padding) * 1.5);
@@ -48,12 +50,15 @@ body {
   font-size: 0.8em;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 500ms ease-in-out;
-  display: none;
+  transition: 500ms ease-in-out;
+  position: absolute;
+  bottom: calc(var(--nav-item-padding) / 2);
+  transform: translateY(50%);
 }
 
 .list .icon {
   position: relative;
+  transition: 250ms ease-in-out;
 }
 
 .list .icon svg {
@@ -66,37 +71,81 @@ body {
 .list .active .text {
   pointer-events: all;
   opacity: 1;
+  transform: translateY(0);
 }
-
-/* .list .active a {
-  padding: 0;
-} */
 
 .list .active .icon {
   transform: translateY(calc(-50% - var(--nav-item-padding)));
 }
 
-.list .active .icon::after {
+.list {
+  position: relative;
+}
+
+.indicator {
+  position: absolute;
+  left: calc(
+    var(--position) * (var(--icon-size) + var(--nav-item-padding) * 2)
+  );
+  transition: 250ms ease-in-out;
+}
+
+.indicator::after,
+.indicator::before {
   content: "";
   position: absolute;
-  z-index: -1;
-  background-color: orange;
-  width: calc(var(--icon-size) * 2);
-  height: calc(var(--icon-size) * 2);
-  top: calc(-0.5 * var(--icon-size));
-  left: calc(-0.5 * var(--icon-size));
   border-radius: 100%;
 }
 
-.list .active .icon::before {
-  /* content: "";
-  position: absolute;
-  z-index: -1;
+.indicator::after {
+  background-color: orange;
+  width: calc(var(--icon-size) * 2);
+  height: calc(var(--icon-size) * 2);
+  top: calc(-1 * var(--icon-size));
+}
+
+.indicator::before {
   background-color: var(--background-color);
-  width: calc(100% + )
-  top: -25%;
-  left: -25%;
-  bottom: -25%;
-  right: -25%;
-  border-radius: 100%; */
+  width: calc((var(--icon-size) + var(--indicator-spacing)) * 2);
+  height: calc((var(--icon-size) + var(--indicator-spacing)) * 2);
+  top: calc(-1 * var(--icon-size) - var(--indicator-spacing));
+  left: calc(-1 * var(--indicator-spacing));
+}
+
+.corners::before {
+  content: "";
+  box-sizing: content-box;
+  position: absolute;
+  width: var(--border-radius);
+  height: var(--border-radius);
+  background-color: white;
+  z-index: 1;
+  top: calc(-1 * var(--indicator-spacing));
+  left: calc(0.2 * var(--indicator-spacing));
+  transform: translateX(-100%);
+  border-top-right-radius: 100%;
+  border-width: calc(var(--indicator-spacing));
+  border-color: var(--background-color);
+  border-style: solid;
+  border-bottom: none;
+  border-left: none;
+}
+
+.corners::after {
+  content: "";
+  box-sizing: content-box;
+  position: absolute;
+  width: var(--border-radius);
+  height: var(--border-radius);
+  background-color: white;
+  z-index: 1;
+  top: calc(-1 * var(--indicator-spacing));
+  left: calc(var(--icon-size) * 2 + -3.2 * var(--indicator-spacing));
+  transform: translateX(100%);
+  border-top-left-radius: 100%;
+  border-width: calc(var(--indicator-spacing));
+  border-color: var(--background-color);
+  border-style: solid;
+  border-bottom: none;
+  border-right: none;
 }
